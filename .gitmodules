@@ -1,0 +1,12 @@
+[submodule "roles/CloudAlchemy/ansible-node-exporter"]
+	path = roles/CloudAlchemy/ansible-node-exporter
+	url = https://github.com/cloudalchemy/ansible-node-exporter.git
+[submodule "roles/CloudAlchemy/ansible-grafana"]
+	path = roles/CloudAlchemy/ansible-grafana
+	url = https://github.com/cloudalchemy/ansible-grafana.git
+[submodule "roles/CloudAlchemy/ansible-prometheus"]
+	path = roles/CloudAlchemy/ansible-prometheus
+	url = https://github.com/cloudalchemy/ansible-prometheus.git
+[submodule "roles/CloudAlchemy/ansible-alertmanager"]
+	path = roles/CloudAlchemy/ansible-alertmanager
+	url = https://github.com/cloudalchemy/ansible-alertmanager.git
