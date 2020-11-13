@@ -1,0 +1,64 @@
+---
+- name: "Prometheus monitoring - Setup node-exporter"
+  collections: ['debops.debops', 'debops.roles01',
+                'debops.roles02', 'debops.roles03']
+
+  hosts: ['monitoring']
+  become: true
+
+  environment: '{{ inventory__environment | d({})
+                   | combine(inventory__group_environment | d({}))
+                   | combine(inventory__host_environment  | d({})) }}'
+
+  # Setup node-exporter
+  roles:
+    # Get debops 'secret'-path
+    - role: secret
+
+    # Install
+    - role: CloudAlchemy/ansible-node-exporter
+      tags: ['role::node-exporter', 'skip::node-exporter']
+
+  # This is required, that node-exporter can access 'pki/default.key'
+  post_tasks:
+    - name: 'Add node-exporter user to "ssl-cert" group'
+      user:
+        name: 'node-exp'
+        groups: 'ssl-cert'
+        append: true
+      notify: restart node_exporter
+      when: ( node_exporter_tls_server_config | length > 0 )
+
+- name: "Prometheus monitoring - Setup Prometheus and Grafana"
+  collections: ['debops.debops', 'debops.roles01',
+                'debops.roles02', 'debops.roles03']
+
+  hosts: ['monitoring_sink']
+  become: true
+
+  environment: '{{ inventory__environment | d({})
+                   | combine(inventory__group_environment | d({}))
+                   | combine(inventory__host_environment  | d({})) }}'
+
+  # Setup Prothemeus+Alertmanager+Grafana
+  pre_tasks:
+    - name: Set prometheus nodes dynamically
+      set_fact:
+        prometheus_targets:
+          node:
+            - targets: "{{ groups['monitor_group'] | map('regex_replace', '$', ':9100') | list }}"
+      tags: ['role::prometheus', 'skip::prometheus']
+
+  roles:
+    # Get debops 'secret'-path
+    - role: secret
+
+    # Install
+    - role: CloudAlchemy/ansible-prometheus
+      tags: ['role::prometheus', 'skip::prometheus']
+
+    - role: CloudAlchemy/ansible-alertmanager
+      tags: ['role::alertmanager', 'skip::alertmanager']
+
+    - role: CloudAlchemy/ansible-grafana
+      tags: ['role::grafana', 'skip::grafana']

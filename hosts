@@ -1,0 +1,13 @@
+# This is an Ansible inventory file in INI format. You can define a list of
+# hosts and groups to be managed by this particular inventory.
+
+[monitoring:children]
+monitoring_sink
+monitoring_nodes
+
+[monitoring_sink]
+# prometheus-and-grafana-vm
+
+[monitoring_nodes]
+# node1-vm
+# node2-vm

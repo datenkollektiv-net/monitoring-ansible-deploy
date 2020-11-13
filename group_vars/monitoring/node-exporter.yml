@@ -1,0 +1,20 @@
+---
+# Documentation:
+# https://github.com/cloudalchemy/ansible-node-exporter
+
+# used in 'node_exporter_basic_auth_users'
+monitor_group: 'monitoring'
+
+# https configuration
+node_exporter_tls_server_config:
+    cert_file: "/etc/pki/realms/domain/default.crt"
+    key_file: "/etc/pki/realms/domain/default.key"
+
+# https://github.com/cloudalchemy/ansible-node-exporter#role-variables
+# requires 'python3-bcrypt' to be installed on controller
+node_exporter_basic_auth_users:
+   node_exporter_user: '{{ lookup("password", secret
+                           + "/node_exporter/"
+                           + monitor_group
+                           + "/node_exporter_user"
+                           + " length=64 chars=ascii_letters,digits") }}'
