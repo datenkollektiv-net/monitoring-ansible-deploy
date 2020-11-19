@@ -17,7 +17,7 @@
 
     # Install
     - role: CloudAlchemy/ansible-node-exporter
-      tags: ['role::node-exporter', 'skip::node-exporter']
+      tags: ['role::node-exporter']
 
   # This is required, that node-exporter can access 'pki/default.key'
   post_tasks:
@@ -47,7 +47,7 @@
         prometheus_targets:
           node:
             - targets: "{{ groups['monitor_group'] | map('regex_replace', '$', ':9100') | list }}"
-      tags: ['role::prometheus', 'skip::prometheus']
+      tags: ['role::prometheus']
 
   roles:
     # Get debops 'secret'-path
@@ -55,10 +55,10 @@
 
     # Install
     - role: CloudAlchemy/ansible-prometheus
-      tags: ['role::prometheus', 'skip::prometheus']
+      tags: ['role::prometheus']
 
     - role: CloudAlchemy/ansible-alertmanager
-      tags: ['role::alertmanager', 'skip::alertmanager']
+      tags: ['role::alertmanager']
 
     - role: CloudAlchemy/ansible-grafana
-      tags: ['role::grafana', 'skip::grafana']
+      tags: ['role::grafana']
