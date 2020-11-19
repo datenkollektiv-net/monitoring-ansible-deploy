@@ -46,7 +46,7 @@
       set_fact:
         prometheus_targets:
           node:
-            - targets: "{{ groups['monitor_group'] | map('regex_replace', '$', ':9100') | list }}"
+            - targets: "{{ groups[ (monitor_group | string) ] | map('regex_replace', '$', ':9100') | list }}"
       tags: ['role::prometheus']
 
   roles:
