@@ -54,6 +54,10 @@
     - role: secret
 
     # Install
+    - role: CloudAlchemy/ansible-pushgateway
+      tags: ['role::pushgateway', 'skip::pushgateway']
+      when: pushgateway_enabled | default(false)
+
     - role: CloudAlchemy/ansible-prometheus
       tags: ['role::prometheus']
 

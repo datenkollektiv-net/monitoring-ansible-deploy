@@ -1,5 +1,11 @@
 ---
 ##########################################################
+# Pushgateway
+# Doc: https://github.com/cloudalchemy/ansible-pushgateway
+##########################################################
+pushgateway_enabled: true
+
+##########################################################
 # Prometheus
 # Doc: https://github.com/cloudalchemy/ansible-prometheus
 ##########################################################
