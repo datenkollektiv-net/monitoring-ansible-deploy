@@ -10,3 +10,6 @@
 [submodule "roles/CloudAlchemy/ansible-alertmanager"]
 	path = roles/CloudAlchemy/ansible-alertmanager
 	url = https://github.com/cloudalchemy/ansible-alertmanager.git
+[submodule "roles/CloudAlchemy/ansible-pushgateway"]
+	path = roles/CloudAlchemy/ansible-pushgateway
+	url = https://github.com/cloudalchemy/ansible-pushgateway.git
