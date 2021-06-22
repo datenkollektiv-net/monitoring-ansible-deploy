@@ -9,7 +9,7 @@
 	url = https://github.com/cloudalchemy/ansible-prometheus.git
 [submodule "roles/CloudAlchemy/ansible-alertmanager"]
 	path = roles/CloudAlchemy/ansible-alertmanager
-	url = https://github.com/cloudalchemy/ansible-alertmanager.git
+	url = git@github.com:datenkollektiv-net/ansible-alertmanager.git
 [submodule "roles/CloudAlchemy/ansible-pushgateway"]
 	path = roles/CloudAlchemy/ansible-pushgateway
 	url = https://github.com/cloudalchemy/ansible-pushgateway.git
